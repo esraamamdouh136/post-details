@@ -1,0 +1,34 @@
+<div class="grid-container" *ngIf="postDetails">
+<div class="card"   *ngFor="
+let postDetails of postDetails
+  | paginate
+  : {
+      itemsPerPage: limit,
+      currentPage: page,
+      totalItems: start
+    };
+"
+>
+    <div class="additional">
+      <div class="user-card">
+        <div class="level center">
+         {{postDetails.email}}
+        </div>
+      </div>
+    </div>
+    <div class="general">
+        <h1>{{postDetails.name}}</h1>
+      <p>{{postDetails.body}}</p>
+      <a class="more" [routerLink]="['/comments', postDetails.userId]">
+        comments
+      </a>
+    </div>
+  </div>
+  </div>
+  <pagination-controls
+  class="pagination-display"
+  previousLabel="Prev"
+  nextLabel="Next"
+  (pageChange)="onTableDataChange($event)"
+>
+</pagination-controls>
